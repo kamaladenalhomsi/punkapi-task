@@ -1,7 +1,7 @@
 // API Service Module
 
 const API = {
-  endpoint: process.env.VUE_APP_API_BASE_URL,
+  endpoint: process.env.VUE_APP_API_BASE_URL || 'https://api.punkapi.com/v2/',
   /**
    * @function fetchData
    * @params route is the route name

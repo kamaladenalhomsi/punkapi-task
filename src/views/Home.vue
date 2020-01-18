@@ -20,7 +20,13 @@
             {{ props.row.name }}
         </b-table-column>
         <b-table-column field="actions" label="ACTIONS" width="40" sortable numeric>
-            {{ props.row.id }}
+            <div class="is-flex home__table-controls">
+              <b-button type="is-info">Details</b-button>
+              <b-button v-if="!props.row.inCart" type="is-success" icon-left="cart-plus" @click="setBeerInCart(props.index), addToCart(props.row)">
+                Add to Cart
+              </b-button>
+              <b-button v-else type="is-danger" icon-left="delete" @click="deleteBeerFromCart(props.index), deleteItemFromCart(props.row.id)">Delete From Cart</b-button>
+            </div>
         </b-table-column>
       </template>
       <template #empty>
@@ -50,7 +56,7 @@
 <script>
 import DataTable from '@/components/DataTable'
 import Avatar from '@/components/Avatar'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'home',
@@ -84,6 +90,12 @@ export default {
     ...mapActions({
       getAllBeers: 'beer/getAllBeers'
     }),
+    ...mapMutations({
+      addToCart: 'cart/ADD_TO_CART',
+      setBeerInCart: 'beer/SET_BEER_IN_CART',
+      deleteBeerFromCart: 'beer/DELETE_BEER_FROM_CART',
+      deleteItemFromCart: 'cart/DELETE_ITEM_FROM_CART'
+    }),
     async fetchPaginatedBeers () {
       this.loading = true
       const { currentPage, perPage, nameSearch } = this
@@ -108,9 +120,17 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  &__table-options {
-    justify-content: space-between;
-    margin-bottom: 20px
+  &__table {
+    &-options {
+      justify-content: space-between;
+      margin-bottom: 20px
+    }
+    &-controls {
+      justify-content: flex-end;
+      button {
+        margin-left: 10px
+      }
+    }
   }
 }
 </style>

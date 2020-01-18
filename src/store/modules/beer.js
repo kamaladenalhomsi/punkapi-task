@@ -1,4 +1,5 @@
-// Beer Modules
+import Vue from 'vue'
+// Beer Module
 
 const state = () => ({
   beers: []
@@ -11,6 +12,12 @@ const getters = {
 const mutations = {
   SET_BEERS (state, beers) {
     state.beers = beers
+  },
+  SET_BEER_IN_CART (state, index) {
+    Vue.set(state.beers[index], 'inCart', true)
+  },
+  DELETE_BEER_FROM_CART (state, index) {
+    Vue.set(state.beers[index], 'inCart', false)
   }
 }
 

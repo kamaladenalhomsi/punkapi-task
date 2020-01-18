@@ -8,20 +8,39 @@
 
         <template slot="end">
             <b-navbar-item tag="div">
-              <p>
+              <p class="is-flex navbar__cart">
                 <b-icon
                     icon="cart"
-                    size="is-medium">
+                    size="is-samll">
                 </b-icon>
+                {{ cartCount }}
               </p>
             </b-navbar-item>
         </template>
     </b-navbar>
 </template>
 
+<style lang="scss" scoped>
+.navbar {
+  &__cart {
+    margin-right: 50px;
+    span {
+      margin-right: 5px !important
+    }
+  }
+}
+</style>
+
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'navbar'
+  name: 'navbar',
+  computed: {
+    ...mapGetters({
+      cartCount: 'cart/GET_CART_COUNT'
+    })
+  }
 }
 </script>
 

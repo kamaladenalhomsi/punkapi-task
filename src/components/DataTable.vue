@@ -1,13 +1,14 @@
 <template>
     <section>
-        <b-pagination :total="100" :current.sync="currentPage" :per-page="perPage" />
+      <b-pagination :total="100" :current.sync="currentPage" :per-page="perPage" />
       <b-table
-            :data="data"
-            :searchable="true"
-            aria-next-label="Next page"
-            aria-previous-label="Previous page"
-            aria-page-label="Page"
-            aria-current-label="Current page">
+        class="data-table"
+        :data="data"
+        :searchable="true"
+        aria-next-label="Next page"
+        aria-previous-label="Previous page"
+        aria-page-label="Page"
+        aria-current-label="Current page">
 
             <template slot-scope="props">
               <slot name="body" v-bind="props"></slot>
@@ -22,6 +23,14 @@
         </b-table>
     </section>
 </template>
+
+<style lang="scss">
+.data-table {
+  td {
+    vertical-align: middle !important
+  }
+}
+</style>
 
 <script>
 export default {
