@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <data-table :data="beers">
+      <template #body="props">
+        <b-table-column field="id" label="ID" width="40" sortable numeric>
+            {{ props.row.id }}
+        </b-table-column>
+      </template>
+    </data-table>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import DataTable from '@/components/DataTable'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    DataTable
+  },
+  created () {
+    this.getAllBeers()
+  },
+  methods: {
+    ...mapActions({
+      getAllBeers: 'beer/getAllBeers'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      beers: 'beer/GET_ALL_BEERS'
+    })
   }
 }
 </script>
