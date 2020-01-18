@@ -5,9 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "buefy": "^0.8.9",
@@ -18,9 +16,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-e2e-cypress": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
-    "@vue/cli-plugin-unit-jest": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
