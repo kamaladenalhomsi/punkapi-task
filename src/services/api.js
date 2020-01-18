@@ -14,7 +14,7 @@ const API = {
         return json
       }
     } catch (e) {
-      console.error(e)
+      console.error(e) // eslint-disable-line
     }
   },
   /**
