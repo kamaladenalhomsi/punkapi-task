@@ -16,6 +16,18 @@ const API = {
     } catch (e) {
       console.error(e)
     }
+  },
+  /**
+   * @function queryParams
+   * @param params
+   * @return encoded URI parameters
+   */
+  queryParams: function (params) {
+    return Object.keys(params)
+      .map(k => {
+        if (params[k]) return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
+      })
+      .join('&')
   }
 }
 

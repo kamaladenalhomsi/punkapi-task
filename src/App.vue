@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <navbar />
-    <router-view/>
+    <div class="container custom-container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -36,4 +38,10 @@ export default {
     }
   }
 }
+
+.custom-container {
+  max-width: 900px !important;
+  margin-top: 100px !important
+}
+
 </style>

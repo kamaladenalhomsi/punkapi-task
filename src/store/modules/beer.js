@@ -15,9 +15,11 @@ const mutations = {
 }
 
 const actions = {
-  async getAllBeers ({ commit }) {
+  async getAllBeers ({ commit }, params) {
+    // Empty the beer state
+    commit('SET_BEERS', [])
     const beers = await this.$api.fetchData({
-      route: 'beers'
+      route: 'beers?' + this.$api.queryParams(params)
     })
     commit('SET_BEERS', beers)
   }
