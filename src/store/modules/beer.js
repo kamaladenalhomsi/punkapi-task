@@ -2,11 +2,13 @@ import Vue from 'vue'
 // Beer Module
 
 const state = () => ({
-  beers: []
+  beers: [],
+  singleBeer: {}
 })
 
 const getters = {
-  GET_ALL_BEERS: state => state.beers
+  GET_ALL_BEERS: state => state.beers,
+  GET_SINGLE_BEER: state => state.singleBeer
 }
 
 const mutations = {
@@ -18,6 +20,9 @@ const mutations = {
   },
   DELETE_BEER_FROM_CART (state, index) {
     Vue.set(state.beers[index], 'inCart', false)
+  },
+  SET_SINGLE_BEER (state, beer) {
+    state.singleBeer = beer
   }
 }
 
@@ -29,6 +34,14 @@ const actions = {
       route: 'beers?' + this.$api.queryParams(params)
     })
     commit('SET_BEERS', beers)
+  },
+  async getSingleBeerByName ({ commit }, beer_name) {
+    const beer = await this.$api.fetchData({
+      route: 'beers?' + this.$api.queryParams({
+        beer_name
+      })
+    })
+    commit('SET_SINGLE_BEER', beer[0])
   }
 }
 

@@ -8,6 +8,12 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('@/views/Home')
+  },
+  {
+    path: '/details/:name',
+    name: 'details',
+    component: () => import('@/views/BeerDetails'),
+    props: true
   }
 ]
 

@@ -1,6 +1,6 @@
 <template>
     <section>
-      <b-pagination :total="100" :current.sync="currentPage" :per-page="perPage" />
+      <b-pagination v-if="!paginationOff" :total="100" :current.sync="currentPage" :per-page="perPage" />
       <b-table
         class="data-table"
         :data="data"
@@ -10,16 +10,16 @@
         aria-page-label="Page"
         aria-current-label="Current page">
 
-            <template slot-scope="props">
-              <slot name="body" v-bind="props"></slot>
-            </template>
-           <template slot="empty">
-                <section class="section">
-                    <div class="content has-text-grey has-text-centered">
-                      <slot name="empty"></slot>
-                    </div>
-                </section>
-            </template>
+          <template slot-scope="props">
+            <slot name="body" v-bind="props"></slot>
+          </template>
+          <template slot="empty">
+              <section class="section">
+                  <div class="content has-text-grey has-text-centered">
+                    <slot name="empty"></slot>
+                  </div>
+              </section>
+          </template>
         </b-table>
     </section>
 </template>
@@ -43,6 +43,10 @@ export default {
     perPage: {
       type: Number,
       default: 10
+    },
+    paginationOff: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

@@ -13,16 +13,16 @@
         <b-table-column field="id" label="ID" width="40" sortable numeric>
             {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="image" label="IMAGE" width="40" sortable numeric>
+        <b-table-column field="image" label="IMAGE" width="40">
             <avatar :src="props.row.image_url ? props.row.image_url : ''" />
         </b-table-column>
-        <b-table-column field="name" label="NAME" width="40" sortable numeric>
+        <b-table-column field="name" label="NAME" width="40" sortable>
             {{ props.row.name }}
         </b-table-column>
-        <b-table-column field="actions" label="ACTIONS" width="40" sortable numeric>
+        <b-table-column field="actions" label="ACTIONS" width="40">
             <div class="is-flex home__table-controls">
-              <b-button type="is-info">Details</b-button>
-              <b-button v-if="!props.row.inCart" type="is-success" icon-left="cart-plus" @click="setBeerInCart(props.index), addToCart(props.row)">
+              <b-button tag="router-link" :to="'/details/' + props.row.name" type="is-info">Details</b-button>
+              <b-button v-if="!props.row.inCart && !$store.getters['cart/IS_ITEM_IN_CART'](props.row.id)" type="is-success" icon-left="cart-plus" @click="setBeerInCart(props.index), addToCart(props.row)">
                 Add to Cart
               </b-button>
               <b-button v-else type="is-danger" icon-left="delete" @click="deleteBeerFromCart(props.index), deleteItemFromCart(props.row.id)">Delete From Cart</b-button>

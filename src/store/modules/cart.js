@@ -5,7 +5,25 @@ const state = () => ({
 
 const getters = {
   GET_ITEMS: state => state.items,
-  GET_CART_COUNT: state => state.items.length
+  GET_CART_COUNT: state => state.items.length,
+  IS_IN_CART: (state, getters, rootState) => {
+    for (let i = 0; i < state.items.length; i++) {
+      if (state.items[i].id === rootState.beer.singleBeer.id) {
+        return true
+      }
+    }
+    return false
+  },
+  IS_ITEM_IN_CART: state => {
+    return id => {
+      for (let i = 0; i < state.items.length; i++) {
+        if (state.items[i].id === id) {
+          return true
+        }
+      }
+      return false
+    }
+  }
 }
 
 const mutations = {
