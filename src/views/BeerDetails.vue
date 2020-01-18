@@ -9,7 +9,8 @@
     </div>
     <div class="columns details__content">
       <div class="column has-text-centered is-one-third">
-        <img class="details__img" :src="beer.image_url" alt="">
+        <img class="details__img" :src="beer.image_url" alt="" @load="imgLoaded = true">
+        <div v-if="!imgLoaded" class="content-placeholder details__img__placeholder"></div>
       </div>
       <div class="column is-three-third">
         <div class="columns is-multiline">
@@ -122,8 +123,12 @@
   }
   &__img {
     width: auto;
-    height: 350px;
-    object-fit: contain
+    max-height: 350px;
+    object-fit: contain;
+    &__placeholder {
+      width: 250px;
+      height: 400px;
+    }
   }
   &__content {
     margin-top: 30px
@@ -161,7 +166,8 @@ export default {
   },
   data () {
     return {
-      isLoading: true
+      isLoading: true,
+      imgLoaded: false
     }
   },
   async created () {
