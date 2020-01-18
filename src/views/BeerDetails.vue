@@ -109,6 +109,7 @@
         </div>
       </div>
     </div>
+    <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -158,8 +159,17 @@ export default {
       type: String
     }
   },
-  created () {
-    this.getSingleBeerByName(this.name)
+  data () {
+    return {
+      isLoading: true
+    }
+  },
+  async created () {
+    await this.getSingleBeerByName(this.name)
+    this.isLoading = false
+  },
+  destroyed () {
+    this.setSingleBeer({})
   },
   computed: {
     ...mapGetters({
@@ -175,7 +185,8 @@ export default {
       addToCart: 'cart/ADD_TO_CART',
       setBeerInCart: 'beer/SET_BEER_IN_CART',
       deleteBeerFromCart: 'beer/DELETE_BEER_FROM_CART',
-      deleteItemFromCart: 'cart/DELETE_ITEM_FROM_CART'
+      deleteItemFromCart: 'cart/DELETE_ITEM_FROM_CART',
+      setSingleBeer: 'beer/SET_SINGLE_BEER'
     })
   }
 }
